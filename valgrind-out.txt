@@ -1,0 +1,202 @@
+==17514== Memcheck, a memory error detector
+==17514== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==17514== Using Valgrind-3.17.0-07f0cdcbb4-20210319X and LibVEX; rerun with -h for copyright info
+==17514== Command: ./start
+==17514== Parent PID: 17505
+==17514== 
+--17514-- 
+--17514-- Valgrind options:
+--17514--    --leak-check=full
+--17514--    --show-leak-kinds=all
+--17514--    --track-origins=yes
+--17514--    --verbose
+--17514--    --log-file=valgrind-out.txt
+--17514-- Contents of /proc/version:
+--17514--   Linux version 5.13.0-40-generic (buildd@lcy02-amd64-069) (gcc (Ubuntu 11.2.0-7ubuntu2) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.37) #45-Ubuntu SMP Tue Mar 29 14:48:14 UTC 2022
+--17514-- 
+--17514-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--17514-- Page sizes: currently 4096, max supported 4096
+--17514-- Valgrind library directory: /usr/libexec/valgrind
+--17514-- Reading syms from /home/konstantin_pc/Рабочий стол/Project/Differentiator/start
+--17514-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--17514--   Considering /usr/lib/debug/.build-id/12/5e7b6995156940f280c8db94f9abac502e6d10.debug ..
+--17514--   .. build-id is valid
+--17514-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--17514--    object doesn't have a symbol table
+--17514--    object doesn't have a dynamic symbol table
+--17514-- Scheduler: using generic scheduler lock implementation.
+--17514-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==17514== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-17514-by-konstantin_pc-on-???
+==17514== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-17514-by-konstantin_pc-on-???
+==17514== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-17514-by-konstantin_pc-on-???
+==17514== 
+==17514== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==17514== don't want to do, unless you know exactly what you're doing,
+==17514== or are doing some strange experiment):
+==17514==   /usr/bin/vgdb --pid=17514 ...command...
+==17514== 
+==17514== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==17514==   /path/to/gdb ./start
+==17514== and then give GDB the following command
+==17514==   target remote | /usr/bin/vgdb --pid=17514
+==17514== --pid is optional if only one valgrind process is running
+==17514== 
+--17514-- REDIR: 0x4028150 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bd4c2 (???)
+--17514-- REDIR: 0x4027f20 (ld-linux-x86-64.so.2:index) redirected to 0x580bd4dc (???)
+--17514-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--17514--    object doesn't have a symbol table
+--17514-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--17514--    object doesn't have a symbol table
+==17514== WARNING: new redirection conflicts with existing -- ignoring it
+--17514--     old: 0x04028150 (strlen              ) R-> (0000.0) 0x580bd4c2 ???
+--17514--     new: 0x04028150 (strlen              ) R-> (2007.0) 0x04849d70 strlen
+--17514-- REDIR: 0x4024930 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484ac10 (strcmp)
+--17514-- REDIR: 0x40286b0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x484e780 (mempcpy)
+--17514-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.29
+--17514--    object doesn't have a symbol table
+--17514-- Reading syms from /usr/lib/x86_64-linux-gnu/libm.so.6
+--17514--   Considering /usr/lib/debug/.build-id/52/58b94a8b76fe04b38a962a2fd96921ab2ded4e.debug ..
+--17514--   .. build-id is valid
+--17514-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+--17514--    object doesn't have a symbol table
+--17514-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--17514--   Considering /usr/lib/debug/.build-id/f0/fc29165cbe6088c0e1adf03b0048fbecbc003a.debug ..
+--17514--   .. build-id is valid
+--17514-- REDIR: 0x4c24d90 (libc.so.6:strnlen) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25050 (libc.so.6:strpbrk) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24950 (libc.so.6:strcmp) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c42e70 (libc.so.6:wcsnlen) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25cc0 (libc.so.6:memset) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c416e0 (libc.so.6:wcslen) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c26200 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c41510 (libc.so.6:wcschr) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c248d0 (libc.so.6:index) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24fd0 (libc.so.6:rindex) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25b90 (libc.so.6:memmove) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+==17514== Preferring higher priority redirection:
+--17514--     old: 0x04d1bfe0 (__memcpy_avx_unalign) R-> (2018.0) 0x0484bed0 __memcpy_avx_unaligned_erms
+--17514--     new: 0x04d1bfe0 (__memcpy_avx_unalign) R-> (2018.1) 0x0484d7c0 memmove
+--17514-- REDIR: 0x4c41590 (libc.so.6:wcscmp) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25fd0 (libc.so.6:stpncpy) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c41b50 (libc.so.6:wmemchr) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24ea0 (libc.so.6:strncmp) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c26060 (libc.so.6:strcasecmp) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24a90 (libc.so.6:strcspn) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c41610 (libc.so.6:wcscpy) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24840 (libc.so.6:strcat) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c26150 (libc.so.6:strncasecmp_l) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25af0 (libc.so.6:bcmp) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c2db30 (libc.so.6:memrchr) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c27610 (libc.so.6:strchrnul) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24a00 (libc.so.6:strcpy) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c26100 (libc.so.6:strcasecmp_l) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24d10 (libc.so.6:strlen) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c24f40 (libc.so.6:strncpy) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25f40 (libc.so.6:stpcpy) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25a60 (libc.so.6:memchr) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25170 (libc.so.6:strspn) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c25dc0 (libc.so.6:mempcpy) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c260b0 (libc.so.6:strncasecmp) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4c27580 (libc.so.6:rawmemchr) redirected to 0x483a1c0 (_vgnU_ifunc_wrapper)
+--17514-- REDIR: 0x4d18e70 (libc.so.6:__strrchr_avx2) redirected to 0x4849750 (rindex)
+--17514-- REDIR: 0x4c219b0 (libc.so.6:malloc) redirected to 0x48437c0 (malloc)
+--17514-- REDIR: 0x4d19040 (libc.so.6:__strlen_avx2) redirected to 0x4849c50 (strlen)
+--17514-- REDIR: 0x4d15560 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x484cf50 (bcmp)
+--17514-- REDIR: 0x4d14420 (libc.so.6:__strcmp_avx2) redirected to 0x484ab10 (strcmp)
+--17514-- REDIR: 0x4913ca0 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4843f40 (operator new(unsigned long))
+--17514-- REDIR: 0x4913d00 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4845220 (operator new[](unsigned long))
+--17514-- REDIR: 0x4c25630 (libc.so.6:__GI_strstr) redirected to 0x484ea20 (__strstr_sse2)
+--17514-- REDIR: 0x4d14da0 (libc.so.6:__memchr_avx2) redirected to 0x484ac90 (memchr)
+--17514-- REDIR: 0x4d1bfe0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x484d7c0 (memmove)
+--17514-- REDIR: 0x4911ec0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x48479c0 (operator delete[](void*))
+--17514-- REDIR: 0x4c21cb0 (libc.so.6:free) redirected to 0x48461b0 (free)
+--17514-- REDIR: 0x4d1bfc0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x484e380 (mempcpy)
+--17514-- REDIR: 0x4911e90 (libstdc++.so.6:operator delete(void*)) redirected to 0x48467e0 (operator delete(void*))
+==17514== Mismatched free() / delete / delete []
+==17514==    at 0x484684F: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10AFB4: Differentiator::EquactionRead() (Differentiator_Function.cpp:130)
+==17514==    by 0x10A5A7: main (Differentiator.cpp:7)
+==17514==  Address 0x4dbc130 is 0 bytes inside a block of size 100 alloc'd
+==17514==    at 0x4845293: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10AEF9: Differentiator::EquactionRead() (Differentiator_Function.cpp:117)
+==17514==    by 0x10A5A7: main (Differentiator.cpp:7)
+==17514== 
+--17514-- REDIR: 0x4d18c60 (libc.so.6:__strchrnul_avx2) redirected to 0x484e270 (strchrnul)
+==17514== Mismatched free() / delete / delete []
+==17514==    at 0x484684F: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10A765: setFree(Block*) (Differentiator_Function.cpp:25)
+==17514==    by 0x10A743: setFree(Block*) (Differentiator_Function.cpp:21)
+==17514==    by 0x10A743: setFree(Block*) (Differentiator_Function.cpp:21)
+==17514==    by 0x10A726: setFree(Block*) (Differentiator_Function.cpp:17)
+==17514==    by 0x10A6F6: Differentiator::~Differentiator() (Differentiator_Function.cpp:10)
+==17514==    by 0x10A5E0: main (Differentiator.cpp:13)
+==17514==  Address 0x4dbe9f0 is 0 bytes inside a block of size 5 alloc'd
+==17514==    at 0x4845293: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10B49F: Differentiator::setReadSpecFunc(char*, unsigned long*) (Differentiator_Function.cpp:253)
+==17514==    by 0x10B320: Differentiator::setReadDegree(char*, unsigned long*) (Differentiator_Function.cpp:213)
+==17514==    by 0x10B204: Differentiator::setReadMulAndDiv(char*, unsigned long*) (Differentiator_Function.cpp:182)
+==17514==    by 0x10B0E8: Differentiator::setReadAddAndSub(char*, unsigned long*) (Differentiator_Function.cpp:151)
+==17514==    by 0x10B198: Differentiator::setReadAddAndSub(char*, unsigned long*) (Differentiator_Function.cpp:166)
+==17514==    by 0x10B198: Differentiator::setReadAddAndSub(char*, unsigned long*) (Differentiator_Function.cpp:166)
+==17514==    by 0x10B075: Differentiator::setReadGlobal(char*) (Differentiator_Function.cpp:141)
+==17514==    by 0x10AF75: Differentiator::EquactionRead() (Differentiator_Function.cpp:126)
+==17514==    by 0x10A5A7: main (Differentiator.cpp:7)
+==17514== 
+==17514== Invalid free() / delete / delete[] / realloc()
+==17514==    at 0x484684F: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10A765: setFree(Block*) (Differentiator_Function.cpp:25)
+==17514==    by 0x10A6F6: Differentiator::~Differentiator() (Differentiator_Function.cpp:10)
+==17514==    by 0x10A5E0: main (Differentiator.cpp:13)
+==17514==  Address 0x10d37b is in a r-- mapped file /home/konstantin_pc/Рабочий стол/Project/Differentiator/start segment
+==17514== 
+==17514== 
+==17514== HEAP SUMMARY:
+==17514==     in use at exit: 0 bytes in 0 blocks
+==17514==   total heap usage: 26 allocs, 27 frees, 92,025 bytes allocated
+==17514== 
+==17514== All heap blocks were freed -- no leaks are possible
+==17514== 
+==17514== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==17514== 
+==17514== 1 errors in context 1 of 3:
+==17514== Invalid free() / delete / delete[] / realloc()
+==17514==    at 0x484684F: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10A765: setFree(Block*) (Differentiator_Function.cpp:25)
+==17514==    by 0x10A6F6: Differentiator::~Differentiator() (Differentiator_Function.cpp:10)
+==17514==    by 0x10A5E0: main (Differentiator.cpp:13)
+==17514==  Address 0x10d37b is in a r-- mapped file /home/konstantin_pc/Рабочий стол/Project/Differentiator/start segment
+==17514== 
+==17514== 
+==17514== 1 errors in context 2 of 3:
+==17514== Mismatched free() / delete / delete []
+==17514==    at 0x484684F: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10A765: setFree(Block*) (Differentiator_Function.cpp:25)
+==17514==    by 0x10A743: setFree(Block*) (Differentiator_Function.cpp:21)
+==17514==    by 0x10A743: setFree(Block*) (Differentiator_Function.cpp:21)
+==17514==    by 0x10A726: setFree(Block*) (Differentiator_Function.cpp:17)
+==17514==    by 0x10A6F6: Differentiator::~Differentiator() (Differentiator_Function.cpp:10)
+==17514==    by 0x10A5E0: main (Differentiator.cpp:13)
+==17514==  Address 0x4dbe9f0 is 0 bytes inside a block of size 5 alloc'd
+==17514==    at 0x4845293: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10B49F: Differentiator::setReadSpecFunc(char*, unsigned long*) (Differentiator_Function.cpp:253)
+==17514==    by 0x10B320: Differentiator::setReadDegree(char*, unsigned long*) (Differentiator_Function.cpp:213)
+==17514==    by 0x10B204: Differentiator::setReadMulAndDiv(char*, unsigned long*) (Differentiator_Function.cpp:182)
+==17514==    by 0x10B0E8: Differentiator::setReadAddAndSub(char*, unsigned long*) (Differentiator_Function.cpp:151)
+==17514==    by 0x10B198: Differentiator::setReadAddAndSub(char*, unsigned long*) (Differentiator_Function.cpp:166)
+==17514==    by 0x10B198: Differentiator::setReadAddAndSub(char*, unsigned long*) (Differentiator_Function.cpp:166)
+==17514==    by 0x10B075: Differentiator::setReadGlobal(char*) (Differentiator_Function.cpp:141)
+==17514==    by 0x10AF75: Differentiator::EquactionRead() (Differentiator_Function.cpp:126)
+==17514==    by 0x10A5A7: main (Differentiator.cpp:7)
+==17514== 
+==17514== 
+==17514== 1 errors in context 3 of 3:
+==17514== Mismatched free() / delete / delete []
+==17514==    at 0x484684F: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10AFB4: Differentiator::EquactionRead() (Differentiator_Function.cpp:130)
+==17514==    by 0x10A5A7: main (Differentiator.cpp:7)
+==17514==  Address 0x4dbc130 is 0 bytes inside a block of size 100 alloc'd
+==17514==    at 0x4845293: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17514==    by 0x10AEF9: Differentiator::EquactionRead() (Differentiator_Function.cpp:117)
+==17514==    by 0x10A5A7: main (Differentiator.cpp:7)
+==17514== 
+==17514== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
