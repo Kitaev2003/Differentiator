@@ -7,6 +7,8 @@
 #define TPCHAR 1
 #define TCHAR 2
 #define TDOUBLE 3
+#define SIZEBLOCK 48
+#define DOUBLEPTR 0.001
 
 union Value
 {
@@ -25,7 +27,7 @@ typedef struct Block
 	
 	Block* right = nullptr;
 
-	int num = 0;
+	size_t num = 0;
 	
 	size_t type = 0;
 
@@ -50,19 +52,16 @@ enum Function
 class Differentiator{
 	public:
 	 
-	Block_Tree* Head_ = nullptr;
+	Block_Tree* HeadRead_ = nullptr;
+	Block_Tree* HeadWrite_ = nullptr;
 	
 	Differentiator();
 	~Differentiator();
-	
-	void getDump();
 
 	void Insert(Block_Tree* elem, size_t type, Value val);
-	void Copy(Block_Tree* old_, Block_Tree* new_);
 
 	//Read and make Tree
 	void EquactionRead();	
-	void setReadGlobal(char* buffer);
 	Block_Tree* setReadAddAndSub(char* buffer, size_t* i);
 	Block_Tree* setReadMulAndDiv(char* buffer, size_t* i);
 	Block_Tree* setReadDegree(char* buffer, size_t* i);
@@ -70,12 +69,14 @@ class Differentiator{
 	Block_Tree* setReadParenthes(char* buffer, size_t* i);
 	Block_Tree* setReadValAndNum(char* buffer, size_t* i);
 	
-	void Reduction();
+	void Reduction(Block_Tree* Head);
+	void setNulAndFunc(Block_Tree* node, bool* repeat);
 	void setNumAndNum(Block_Tree* node, bool* repeat);
+	void setAddAndSub(Block_Tree* node, bool* repeat);
 	void setSpecFuncAndNum(Block_Tree* node, bool* repeat);
 	
-	Block_Tree* Derivative(Block_Tree* node);
-	Block_Tree* DiffStandartFunc(Block_Tree* node);
+	Block_Tree* Derivative(const Block_Tree* node);
+	Block_Tree* DiffStandartFunc(const Block_Tree* node);
 
 	private:
 	
@@ -83,5 +84,6 @@ class Differentiator{
 };
 
 void DumpEquatiton(Block_Tree* node);
+void getDump(Block_Tree* Head);
 void BodyDump(Block_Tree* Tree, Block_Tree* Tree_Next, std::ofstream* GRAF, size_t* num, size_t* num_next);
 void setFree(Block_Tree*  Tree);
