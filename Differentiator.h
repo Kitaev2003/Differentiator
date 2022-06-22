@@ -52,8 +52,9 @@ enum Function
 class Differentiator{
 	public:
 	 
-	Block_Tree* HeadRead_ = nullptr;
-	Block_Tree* HeadWrite_ = nullptr;
+	Block_Tree* HeadRead_ = new Block_Tree;
+	Block_Tree* HeadWrite_ = new Block_Tree;
+
 	
 	Differentiator();
 	~Differentiator();
@@ -77,6 +78,7 @@ class Differentiator{
 	
 	Block_Tree* Derivative(const Block_Tree* node);
 	Block_Tree* DiffStandartFunc(const Block_Tree* node);
+	Block_Tree* DiffSpecFunc(const Block_Tree* node);
 
 	private:
 	
@@ -85,5 +87,6 @@ class Differentiator{
 
 void DumpEquatiton(Block_Tree* node);
 void getDump(Block_Tree* Head);
+void PrintElement(Block_Tree* Tree);
 void BodyDump(Block_Tree* Tree, Block_Tree* Tree_Next, std::ofstream* GRAF, size_t* num, size_t* num_next);
 void setFree(Block_Tree*  Tree);

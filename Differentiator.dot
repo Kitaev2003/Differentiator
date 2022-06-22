@@ -1,30 +1,26 @@
 digraph graphname 
  {
 node [shape=record, color = "black"]; //Описание блоков графа
-	18[fillcolor = "#40e0d0", style="rounded,filled", label="{Type =  char| Value = +}"];
+	9[fillcolor = "#40e0d0", style="rounded,filled", label="{Type =  char| Value = *}"];
 //Далее работа функции BodyDump
-	21[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = *}"];
-	18->21;
-	19[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = +}"];
-	21->19;
-	23[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = +}"];
-	21->23;
-	26[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = *}"];
-	23->26;
-	24[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = +}"];
-	26->24;
-	30[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = double| Value = 1}"];
-	26->30;
-	27[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = *}"];
-	23->27;
-	33[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = double| Value = 1}"];
-	27->33;
-	25[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = +}"];
-	27->25;
-	22[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = *}"];
-	18->22;
-	36[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = double| Value = 1}"];
-	22->36;
-	20[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = *}"];
-	22->20;
+	0[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = /}"];
+	9->0;
+	11[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = -}"];
+	0->11;
+	13[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = double| Value = 1}"];
+	11->13;
+	14[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = ^}"];
+	0->14;
+	52[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = x}"];
+	14->52;
+	15[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = double| Value = 2}"];
+	14->15;
+	10[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char*| Value = cos}"];
+	9->10;
+	3[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = /}"];
+	10->3;
+	2[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = double| Value = 1}"];
+	3->2;
+	4[fillcolor = "#40e0d0", style="rounded,filled", label="{Type = char| Value = x}"];
+	3->4;
 }

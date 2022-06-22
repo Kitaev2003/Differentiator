@@ -6,19 +6,23 @@ int main()
 
 	Differentiator play;
 
+	std::cout << "----------Start work EquactionRead----------" << std::endl;
+
 	play.EquactionRead();
 
-	play.Reduction(play.HeadRead_);
+	play.Reduction(play.HeadRead_);//Reduction 
 
+	std::cout << "----------End work EquactionRead------------" << std::endl;
+	std::cout << "----------Start work Derivative-------------" << std::endl;
 	play.HeadWrite_ = play.Derivative(play.HeadRead_);
-
+	std::cout << "----------End work Derivative---------------" << std::endl;
 	play.Reduction(play.HeadWrite_);
 
-	DumpEquatiton(play.HeadRead_);
-
 	getDump(play.HeadWrite_);
+	std::cout << "END EQUACTION:";
+	DumpEquatiton(play.HeadWrite_);
 
-	std::cout << "\n----------End work Differentiator---------" << std::endl;
+	std::cout << "\n----------End work Differentiator-----------" << std::endl;
 	
 	return 0;
 }

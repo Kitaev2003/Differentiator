@@ -1,15 +1,13 @@
 #include "Differentiator.h"
 
 Differentiator::Differentiator()
-{
-	HeadRead_ = new Block_Tree;
-	HeadWrite_ = new Block_Tree;
-}
+{}
 
 Differentiator::~Differentiator()
 {
-	setFree(HeadRead_);
 	setFree(HeadWrite_);
+
+	setFree(HeadRead_);
 }
 
 void setFree(Block_Tree *Tree)
@@ -22,12 +20,7 @@ void setFree(Block_Tree *Tree)
 	{
 		setFree(Tree->right);
 	}
-	if (Tree->type == TPCHAR)
-	{
-		delete (Tree->val.cp);
-	}
-
-	delete (Tree);
+	delete Tree;
 }
 
 void BodyDump(Block_Tree *Tree, Block_Tree *Tree_Next, std::ofstream *GRAF)
@@ -59,6 +52,22 @@ void BodyDump(Block_Tree *Tree, Block_Tree *Tree_Next, std::ofstream *GRAF)
 	if(Tree_Next->right != nullptr)
 	{
 		BodyDump(Tree_Next, Tree_Next->right, GRAF); //Запускаем рекурсию
+	}
+}
+
+void PrintElement(Block_Tree* Tree)
+{
+	switch(Tree->type)
+	{
+		case TCHAR:
+			std::cout << Tree->val.c << std::endl;
+			break;
+		case TPCHAR:
+			std::cout << Tree->val.cp << std::endl;
+			break;
+		case TDOUBLE:
+			std::cout << Tree->val.d << std::endl;
+			break;
 	}
 }
 
@@ -100,7 +109,7 @@ void getDump(Block_Tree* Head)
 	system("dot -Tpng Differentiator.dot -o Differentiator"); //Делаем PNG-Дерево
 }
 
-void DumpEquatiton(Block_Tree *node)
+void DumpEquatiton(Block_Tree* node)
 {
 	if (node->parenthes)
 	{
@@ -117,15 +126,15 @@ void DumpEquatiton(Block_Tree *node)
 		}
 		switch (node->type)
 		{
-		case TCHAR:
-			std::cout << node->val.c;
-			break;
-		case TDOUBLE:
-			std::cout << node->val.d;
-			break;
-		case TPCHAR:
-			std::cout << node->val.cp;
-			break;
+			case TCHAR:
+				std::cout << node->val.c;
+				break;
+			case TDOUBLE:
+				std::cout << node->val.d;
+				break;
+			case TPCHAR:
+				std::cout << node->val.cp;
+				break;
 		}
 		if (node->right != nullptr)
 		{
@@ -142,7 +151,7 @@ void Differentiator::Insert(Block_Tree *elem, size_t type, Value val)
 	elem->val = val;
 
 	size_++;
-	elem->num = size_; // for graphviz
+	elem->num = size_;//for graphviz
 }
 
 Block_Tree *Differentiator::Derivative(const Block_Tree *node)
@@ -161,6 +170,9 @@ Block_Tree *Differentiator::Derivative(const Block_Tree *node)
 			return new_node;
 			break;
 		}
+		case TPCHAR:
+			return DiffSpecFunc(node);
+			break;
 		default:
 			std::cout << "Произошла ошибка" << std::endl;
 			break;
@@ -174,7 +186,9 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 	
 	Block_Tree *new_node = new Block_Tree;
 
-	Insert(new_node, node->type, node->val);
+	new_node->type =  TCHAR;
+
+	DumpEquatiton(new_node);
 
 	switch (node->val.c)
 	{
@@ -184,20 +198,19 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 
 			Block_Tree *old_left = new Block_Tree;
 			Block_Tree *old_right = new Block_Tree;
-
 			Block_Tree *next_mul1 = new Block_Tree;
 			Block_Tree *next_mul2 = new Block_Tree;
 
-			Insert(old_left, node->left->type, node->left->val);
-			Insert(old_right, node->right->type, node->right->val);
+			memcpy(old_left, node->left, SIZEBLOCK);
+			memcpy(old_right, node->right, SIZEBLOCK);
 
-			new_node->val.c = '+'; //+
+			new_node->val.c = '+';//+
 
 			val.c = '*';
-			Insert(next_mul1, TCHAR, val); //*
-			Insert(next_mul2, TCHAR, val); //*
+			Insert(next_mul1, TCHAR, val);//*
+			Insert(next_mul2, TCHAR, val);//*
 
-			next_mul1->left = old_left;	  //*v
+			next_mul1->left = old_left;//*v
 			next_mul2->right = old_right; //*u
 
 			next_mul1->right = Derivative(node->right); // u'*v
@@ -213,21 +226,25 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 		{
 			std::cout << "We in the case \"/\"" << std::endl;
 			new_node->val.c = '/';
+			new_node->parenthes = true;
 
 			Block_Tree *old_left = new Block_Tree;
-			Block_Tree *old_right = new Block_Tree;
-
-			Insert(old_left, node->left->type, node->left->val);
-			Insert(old_right, node->right->type, node->right->val);
-
+			Block_Tree *old_right1 = new Block_Tree;
+			Block_Tree *old_right2 = new Block_Tree;
 			Block_Tree *next_sub = new Block_Tree;
 			Block_Tree *next_mul1 = new Block_Tree;
 			Block_Tree *next_mul2 = new Block_Tree;
 			Block_Tree *next_degree = new Block_Tree;
 			Block_Tree *next_two = new Block_Tree;
 
+			memcpy(old_left, node->left, SIZEBLOCK);
+			memcpy(old_right1, node->right, SIZEBLOCK);
+			memcpy(old_right2, node->right, SIZEBLOCK);
+			old_right2->num = old_right2->num + SIZEBLOCK;
+
 			val.c = '-';
 			Insert(next_sub, TCHAR, val); //-
+			next_sub->parenthes = true;
 
 			val.c = '*';
 			Insert(next_mul1, TCHAR, val); //*
@@ -236,7 +253,7 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 			next_sub->left = next_mul1;	 //*-
 			next_sub->right = next_mul2; //*-*
 
-			next_mul1->left = old_right; //*v-*
+			next_mul1->left = old_right1; //*v-*
 			next_mul2->right = old_left; //*v-u*
 
 			val.c = '^';
@@ -247,10 +264,10 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 
 			next_degree->right = next_two; //^2
 
-			next_degree->left = old_right; // v^2
+			next_degree->left = old_right2; // v^2
 
 			next_mul1->right = Derivative(node->left); // u'*v-u*
-			next_mul1->left = Derivative(node->right); // u'*v-u*v'
+			next_mul2->left = Derivative(node->right); // u'*v-u*v'
 
 			new_node->left = next_sub;	   //(u'*v-u*v')
 			new_node->right = next_degree; //(u'*v-u*v')/(v^2)
@@ -259,6 +276,8 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 
 		case '+': //(u+v) = u' + v'
 		{
+			val.c = '+';
+			Insert(new_node, TCHAR, val);
 			new_node->left = Derivative(node->left);
 			new_node->right = Derivative(node->right);
 			break;
@@ -266,6 +285,8 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 
 		case '-': //(u-v) = u' - v'
 		{
+			val.c = '-';
+			Insert(new_node, TCHAR, val);
 			new_node->left = Derivative(node->left);
 			new_node->right = Derivative(node->right);
 			break;
@@ -318,6 +339,103 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 		default:
 		{
 			std::cout << "Такой функции нет" << std::endl;
+			exit(1); 
+		}
+	}
+	return new_node;
+}
+
+Block_Tree *Differentiator::DiffSpecFunc(const Block_Tree *node)
+{
+	Value val;
+	Block_Tree* new_node = new Block_Tree;
+	Block_Tree* old_arg = new Block_Tree; 
+	memcpy(old_arg, node->right, SIZEBLOCK); 
+
+	switch(node->val.cp[0])
+	{
+		case 'c':
+		{
+			Block_Tree* new_func = new Block_Tree;
+			Block_Tree* new_mul2 = new Block_Tree;
+			Block_Tree* new_onesub = new Block_Tree;
+			
+			val.c = '*';
+			Insert(new_node, TCHAR, val);
+			Insert(new_mul2, TCHAR, val);
+			
+			const char* str = "sin"; 
+			val.cp = str; 
+			Insert(new_func, TPCHAR, val); 
+
+			val.d = -1;
+			Insert(new_onesub, TDOUBLE, val); 
+
+			new_node->left = new_onesub;
+			new_node->right = new_mul2; 
+			new_mul2->right =new_func; 
+			new_func->right = old_arg; 
+			new_mul2->left = Derivative(node->right);
+
+			break;
+		}
+		case 's':
+		{
+			Block_Tree* new_func = new Block_Tree;
+			
+			val.c = '*';
+			Insert(new_node, TCHAR, val);
+			
+			const char* str = "cos"; 
+			val.cp = str; 
+			Insert(new_func, TPCHAR, val); 
+
+			new_node->right = new_func; 
+			new_func->right = old_arg; 
+			new_node->left = Derivative(node->right);
+
+			break;
+		}
+		case 't':
+		{
+			Block_Tree* new_func = new Block_Tree; 
+			Block_Tree* new_degree = new Block_Tree;
+			Block_Tree* new_two = new Block_Tree;
+			
+			const char* str = "cos"; 
+			val.cp = str;
+			Insert(new_func, TPCHAR, val); 
+
+			val.c = '/';
+			Insert(new_node, TCHAR, val); 
+
+			val.c = '^';
+			Insert(new_degree, TCHAR, val);
+
+			val.d = 2;
+			Insert(new_two, TDOUBLE, val); 
+
+			new_node->right = new_degree;
+			new_degree->left = new_func;
+			new_func->right = old_arg; 
+			new_degree->right = new_two; 
+			new_node->left = Derivative(node->right);
+
+			break;
+		}
+		case 'l':
+		{
+			val.c = '/';
+			Insert(new_node, TCHAR, val);
+			new_node->right = old_arg; 
+			new_node->left = Derivative(node->right);
+
+			break;
+		}
+		default:
+		{
+			std::cout << "Такой функции нет" << std::endl;
+			exit(1);
 		}
 	}
 	return new_node;

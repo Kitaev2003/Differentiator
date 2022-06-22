@@ -17,12 +17,12 @@ void Differentiator::EquactionRead()
 
 	std::cout << buffer << std::endl;
 
-	delete (buffer);
+	delete [] buffer;
 }
 
 Block_Tree *Differentiator::setReadAddAndSub(char *buffer, size_t *i)
 {
-	Block_Tree *left;
+	Block_Tree* left;
 	Value val;
 
 	left = setReadMulAndDiv(buffer, i);
@@ -53,7 +53,7 @@ Block_Tree *Differentiator::setReadAddAndSub(char *buffer, size_t *i)
 
 Block_Tree *Differentiator::setReadMulAndDiv(char *buffer, size_t *i)
 {
-	Block_Tree *left;
+	Block_Tree* left;
 	Value val;
 
 	left = setReadDegree(buffer, i);
