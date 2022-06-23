@@ -1,21 +1,38 @@
 #include "Differentiator.h"
 
-void Differentiator::EquactionRead()
+char* BufferTerminalRead()
+{
+	char* buffer = new char[100];
+
+	std::cout << "Введите начальное уравнение:";
+
+	std::cin >>  buffer;
+
+	std::cout <<"Начальное уравнение:" << buffer << std::endl;
+
+	return buffer;
+}
+
+char* BufferFileRead()
 {
 	char *buffer = new char[100];
-	size_t i = 0;
-
 	std::ifstream READ;
 
 	READ.open("Equaction.txt");
 	READ.getline(buffer, 100, '\n');
 	READ.close();
 
+	std::cout <<"Начальное уравнение:" << buffer << std::endl;
+
+	return buffer;
+}
+void Differentiator::EquactionRead(char* buffer)
+{
+	size_t i = 0;
+
 	HeadRead_ = setReadAddAndSub(buffer, &i);
 
 	size_ = i++;
-
-	std::cout << buffer << std::endl;
 
 	delete [] buffer;
 }

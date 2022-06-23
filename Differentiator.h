@@ -62,7 +62,7 @@ class Differentiator{
 	void Insert(Block_Tree* elem, size_t type, Value val);
 
 	//Read and make Tree
-	void EquactionRead();	
+	void EquactionRead(char* buffer);	
 	Block_Tree* setReadAddAndSub(char* buffer, size_t* i);
 	Block_Tree* setReadMulAndDiv(char* buffer, size_t* i);
 	Block_Tree* setReadDegree(char* buffer, size_t* i);
@@ -90,3 +90,5 @@ void getDump(Block_Tree* Head);
 void PrintElement(Block_Tree* Tree);
 void BodyDump(Block_Tree* Tree, Block_Tree* Tree_Next, std::ofstream* GRAF, size_t* num, size_t* num_next);
 void setFree(Block_Tree*  Tree);
+char* BufferFileRead();
+char* BufferTerminalRead();

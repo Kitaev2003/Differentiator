@@ -32,13 +32,13 @@ void BodyDump(Block_Tree *Tree, Block_Tree *Tree_Next, std::ofstream *GRAF)
 		switch (Tree_Next->type)
 		{
 		case TPCHAR:
-			*GRAF << "	" << Tree_Next->num << "[fillcolor = \"#40e0d0\", style=\"rounded,filled\", label=\"{Type = char*| Value = " << Tree_Next->val.cp << "}\"];" << std::endl;
+			*GRAF << "	" << Tree_Next->num << "[fillcolor = \"#40e0d0\", style=\"rounded,filled\", label=\"{Type = char*| Value = " << Tree_Next->val.cp <<" | Left = "<< Tree_Next->left << "|Right = "<< Tree_Next->right << "}\"];" << std::endl;
 			break;
 		case TCHAR:
-			*GRAF << "	" << Tree_Next->num << "[fillcolor = \"#40e0d0\", style=\"rounded,filled\", label=\"{Type = char| Value = " << Tree_Next->val.c << "}\"];" << std::endl;
+			*GRAF << "	" << Tree_Next->num << "[fillcolor = \"#40e0d0\", style=\"rounded,filled\", label=\"{Type = char| Value = " << Tree_Next->val.c <<" | Left = "<< Tree_Next->left << "|Right = "<< Tree_Next->right << "}\"];" << std::endl;
 			break;
 		case TDOUBLE:
-			*GRAF << "	" << Tree_Next->num << "[fillcolor = \"#40e0d0\", style=\"rounded,filled\", label=\"{Type = double| Value = " << Tree_Next->val.d << "}\"];" << std::endl;
+			*GRAF << "	" << Tree_Next->num << "[fillcolor = \"#40e0d0\", style=\"rounded,filled\", label=\"{Type = double| Value = " << Tree_Next->val.d << "| Left = "<< Tree_Next->left << "|Right = "<< Tree_Next->right << "}\"];" << std::endl;
 			break;
 		}
 
@@ -194,8 +194,6 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 	{
 		case '*': //(uv)' = u'v + uv'
 		{
-			std::cout << "We in the case \"*\"" << std::endl;
-
 			Block_Tree *old_left = new Block_Tree;
 			Block_Tree *old_right = new Block_Tree;
 			Block_Tree *next_mul1 = new Block_Tree;
@@ -224,7 +222,6 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 
 		case '/': //(u/v)' =(u'*v - u*v')/(v^2)
 		{
-			std::cout << "We in the case \"/\"" << std::endl;
 			new_node->val.c = '/';
 			new_node->parenthes = true;
 
@@ -296,7 +293,6 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 		{
 			if (node->left->type != TDOUBLE)
 			{
-				std::cout << "We in the case \"^\"" << std::endl;
 				new_node->val.c = '*';
 
 				Block_Tree *next_mul = new Block_Tree;
@@ -330,7 +326,6 @@ Block_Tree *Differentiator::DiffStandartFunc(const Block_Tree *node)
 
 		case 'x':
 		{
-			std::cout << "We in the case \"x\"" << std::endl;
 			val.d = 1;
 			Insert(new_node, TDOUBLE, val);
 			break;
