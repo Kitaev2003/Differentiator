@@ -10,9 +10,6 @@ int main()
 
 	play.EquactionRead(BufferFileRead());
 
-	getDump(play.HeadRead_);
-	DumpEquatiton(play.HeadRead_);
-
 	play.Reduction(play.HeadRead_);
 
 	std::cout << "----------End work EquactionRead------------" << std::endl;
@@ -20,8 +17,6 @@ int main()
 	play.HeadWrite_ = play.Derivative(play.HeadRead_);
 
 	std::cout << "----------End work Derivative---------------" << std::endl;
-	getDump(play.HeadWrite_);
-	
 	play.Reduction(play.HeadWrite_);
 
 	getDump(play.HeadWrite_);
